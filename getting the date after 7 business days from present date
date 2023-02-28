@@ -1,0 +1,10 @@
+with d as
+(select dateadd(day,7,getdate()) as d1)
+select dateadd(day,2*(datediff(week,getdate(),d1)),d1) ,d1  from d
+
+
+
+if todays date is 28-02-2023
+after seven days the date will be 07-03-2023 
+but within those 7 days there is a saturday and sunday which are not business date
+therefore our output should be todays date + 7business days=09-03-2023

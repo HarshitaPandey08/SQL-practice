@@ -1,0 +1,6 @@
+declare @n int;
+set @n=3
+
+select dateadd(week,@n-1,DATEADD(day,(8-datepart(weekday,getdate())),getdate()))
+
+

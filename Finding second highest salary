@@ -1,0 +1,25 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [emp_id]
+      ,[emp_name]
+      ,[dept_id]
+      ,[salary]
+  FROM [sql].[dbo].[emp];
+
+*****MEthod 1*****
+ with tab as (select salary,dept_id,dense_rank() over (partition by dept_id order by salary DESC) as r
+  from [sql].[dbo].[emp])
+  select salary,dept_id 
+  from tab
+  where r=2
+  
+  
+  **********MEthod 2**********
+
+  select * from
+  (select salary,dept_id,dense_rank() over (partition by dept_id order by salary DESC) as r
+  from [sql].[dbo].[emp]) t
+  
+  where r=2
+
+
+both the method uses tow different ways of defining a CTE
